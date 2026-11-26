@@ -1,0 +1,15 @@
+--- a/internal/archive/archive.go
++++ b/internal/archive/archive.go
+@@ -359,7 +359,11 @@
+ 			return err
+ 		}
+ 	case FormatLzma:
+-		compressor, err = xz.NewWriter(fd)
++		cfg := xz.WriterConfig{
++			// Linux's in-kernel XZ decoder does not support CRC64
++			CheckSum: xz.CRC32,
++		}
++		compressor, err = cfg.NewWriter(fd)
+ 		if err != nil {
+ 			return err
+ 		}
