@@ -190,5 +190,12 @@ there. It requires `git`; `pmbootstrap` itself you need to
 - Root partition resize was skipped ("no free space left") and e2fsck flagged
   the root filesystem as needing a manual `e2fsck -f` pass — not yet
   investigated, may be unrelated to the two bugs above.
-- Post-`switch_root` boot (first full userspace start, display, XFCE) not yet
-  separately verified end-to-end with the debugging kernel options reverted.
+
+## Seen it in action
+
+Full post-`switch_root` boot into XFCE/X11 is confirmed working — this is the
+actual tablet running [**jarvis**](https://github.com/MachuraHarry/jarvis), a
+German-language voice assistant (Claude Code as the brain, Vosk for offline
+wake-word/speech recognition, a WebKitGTK fullscreen HUD) as its daily-driver
+desktop environment. If you want to see what a real application looks like
+running on top of this port, that's the best proof.
