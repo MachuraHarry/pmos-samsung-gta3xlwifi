@@ -141,13 +141,32 @@ completes — see
 
 ## How to build
 
+### Quick start
+
+```sh
+git clone https://github.com/MachuraHarry/pmos-samsung-gta3xlwifi
+cd pmos-samsung-gta3xlwifi
+./setup.sh                 # clones pmaports and drops these files into it
+                            # (or: ./setup.sh /path/to/existing/pmaports)
+```
+
+`setup.sh` clones [pmaports](https://gitlab.postmarketos.org/postmarketOS/pmaports)
+(`v25.12` branch) if you don't already have a checkout, copies
+`device-samsung-gta3xlwifi`/`linux-samsung-gta3xlwifi` into
+`device/testing/`, drops in the already-patched `postmarketos-mkinitfs`
+package, and prints the exact `pmbootstrap` commands to build and flash from
+there. It requires `git`; `pmbootstrap` itself you need to
+[install separately](https://postmarketos.org/pmbootstrap).
+
+### Manual steps (what the script does)
+
 1. Check out [pmaports](https://gitlab.postmarketos.org/postmarketOS/pmaports)
    (this was done against the `v25.12` branch) and drop in
    `pmaports/device-samsung-gta3xlwifi/` and
    `pmaports/linux-samsung-gta3xlwifi/` from this repo under `device/testing/`.
-2. Apply the patch in `pmaports/main-postmarketos-mkinitfs/` to pmaports'
-   `main/postmarketos-mkinitfs/` (bump `pkgrel`, add the patch to `source=`
-   and `sha512sums=`, same as done here).
+2. Copy `pmaports/main-postmarketos-mkinitfs/` over pmaports'
+   `main/postmarketos-mkinitfs/` (already has the patch applied, `pkgrel`
+   bumped, and checksums updated).
 3. `pmbootstrap init` with vendor `samsung`, device `gta3xlwifi`.
 4. `pmbootstrap build postmarketos-mkinitfs` and
    `pmbootstrap build linux-samsung-gta3xlwifi` — use the default
